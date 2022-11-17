@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "noteproject"
+version = "0.1.0"
+description = ""
+authors = ["blackboxsql <pythonboy007@gmailcom>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "3.2.15"
+djangorestframework = "^3.13.1"
+Markdown = "^3.4.1"
+django-filter = "^22.1"
+django-allauth = "^0.51.0"
+django-rest-auth = "^0.9.5"
+Pillow = "^9.2.0"
+psycopg2 = "^2.9.3"
+django-cors-headers = "^3.13.0"
+django-seed = "^0.3.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

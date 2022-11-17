@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.img1 {
+  height: 184px;
+  width: 138px;
+  border-radius: 15px;
+  background-image: url("/icons/hi.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: aqua;
+}
+.img2 {
+  background-image: url("/imagehere.png");
+  border-radius: 15px;
+  width: 111px;
+  height: 148px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
