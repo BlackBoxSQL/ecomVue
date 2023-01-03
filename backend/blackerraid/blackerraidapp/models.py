@@ -63,6 +63,9 @@ class Actor(CommonInfo):
     def __str__(self):
         return f"{self.name}"
 
+class Rated(models.Model):
+    rated = models.ImageField(upload_to="media/rating")
+
 class Movie(models.Model):
     name = models.CharField(max_length=100)
     release = models.DateField(auto_now_add=False, auto_now=False)
@@ -77,6 +80,7 @@ class Movie(models.Model):
     director = models.ManyToManyField(
         Director,
     )
+    rated = models.ForeignKey(Rated, on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = "Movie"
@@ -131,7 +135,8 @@ class Seat(models.Model):
 
 class InTheater(models.Model):
     name = models.ForeignKey(Movie, default="", on_delete=models.DO_NOTHING)
-    theater = models.ForeignKey(Theater, default="", on_delete=models.DO_NOTHING)
+    theater = models.ForeignKey(
+        Theater, default="", on_delete=models.DO_NOTHING)
     show_date = models.DateField(auto_now_add=False, auto_now=False)
     show_time = models.TimeField(auto_now_add=False, auto_now=False)
 
@@ -146,8 +151,10 @@ class Booking(models.Model):
     number_of_seats = models.IntegerField()
     time_stamp = models.DateTimeField(auto_now_add=True)
     booked = models.BooleanField(default=False)
-    user = models.ForeignKey(CustomUser, default="", on_delete=models.DO_NOTHING)
-    show = models.ForeignKey(InTheater, default="", on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(CustomUser, default="",
+                             on_delete=models.DO_NOTHING)
+    show = models.ForeignKey(InTheater, default="",
+                             on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = "Booking"
@@ -170,8 +177,10 @@ class ShowSeat(models.Model):
     seat = models.ForeignKey(
         Seat, default="", on_delete=models.DO_NOTHING, related_name="show_seat_seat"
     )
-    intheater = models.ForeignKey(InTheater, default="", on_delete=models.DO_NOTHING)
-    booking = models.ForeignKey(Booking, default="", on_delete=models.DO_NOTHING)
+    intheater = models.ForeignKey(
+        InTheater, default="", on_delete=models.DO_NOTHING)
+    booking = models.ForeignKey(
+        Booking, default="", on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = "ShowSeat"
@@ -189,9 +198,10 @@ class ShowSeat(models.Model):
 class Payment(models.Model):
     amount = models.IntegerField()
     time_stamp = models.DateTimeField(auto_now_add=True)
-    transactionId = models.CharField(max_length=80)
+    transaction_id = models.CharField(max_length=80)
     payment_method = models.CharField(max_length=80)
-    booking = models.ForeignKey(Booking, default="", on_delete=models.DO_NOTHING)
+    booking = models.ForeignKey(
+        Booking, default="", on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name = "Payment"

@@ -18,12 +18,12 @@
   width: 129px;
   height: 172px;
   border-radius: 15px;
-  margin-left: 8px;
-  margin-bottom: 8px;
+  margin-left: 7px;
+  margin-bottom: 7px;
 }
 .avatar {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .ninja {

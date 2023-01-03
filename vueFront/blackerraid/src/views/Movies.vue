@@ -1,6 +1,6 @@
 <template>
     <h1>Movies</h1>
-    <div v-for="movie in movies" v-bind:key="movie.id">
+    <div v-for="movie in movies" v-bind:key="movie.id" >
       <p class="text-xl text-primary">{{ movie.name }}</p>
       <img class="poster" :src="movie.poster" />
       <p>{{ dateFormat(movie.release) }}</p>
