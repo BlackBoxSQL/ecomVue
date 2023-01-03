@@ -18,8 +18,8 @@
   width: 129px;
   height: 172px;
   border-radius: 15px;
-  margin-left: 7px;
-  margin-bottom: 7px;
+  margin-left: 8px;
+  margin-bottom: 8px;
 }
 .avatar {
   width: 40px;
