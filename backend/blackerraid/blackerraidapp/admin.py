@@ -15,6 +15,8 @@ from .models import (
     ShowSeat,
     Payment,
     Seat,
+    Rating,
+    Filmography
 )
 
 
@@ -34,3 +36,5 @@ admin.site.register(Booking)
 admin.site.register(ShowSeat)
 admin.site.register(Payment)
 admin.site.register(Seat)
+admin.site.register(Rating)
+admin.site.register(Filmography)

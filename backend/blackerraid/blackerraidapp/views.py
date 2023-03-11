@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from django.db.models import Max, F
 
 from .models import Movie, InTheater, ShowSeat, Seat
 from .serializers import (

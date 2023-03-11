@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class CustomUser(AbstractUser):
     pass
+
 
 class CommonInfo(models.Model):
     GENDER_CHOICES = (
@@ -25,17 +27,21 @@ class CommonInfo(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-class Director(CommonInfo):
-    FILMOGRAPHY = (
-        ("Short Film", "Short Film"),
-        ("Film", "Film"),
-        ("TV Show", "TV Show"),
-        ("TV Commercial", "TV Commercial"),
-    )
 
-    directcs = models.CharField(
-        max_length=15,
-        choices=FILMOGRAPHY,
+class Filmography(models.Model):
+    name = models.CharField(max_length=15)
+
+    class Meta:
+        verbose_name = "Filmography"
+        verbose_name_plural = "Filmography"
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Director(CommonInfo):
+    directcs = models.ManyToManyField(
+        Filmography
     )
 
     class Meta:
@@ -44,6 +50,7 @@ class Director(CommonInfo):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
@@ -55,6 +62,7 @@ class Genre(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+
 class Actor(CommonInfo):
     class Meta:
         verbose_name = "Actor"
@@ -63,8 +71,17 @@ class Actor(CommonInfo):
     def __str__(self):
         return f"{self.name}"
 
-class Rated(models.Model):
-    rated = models.ImageField(upload_to="media/rating")
+
+class Rating(models.Model):
+    image = models.ImageField(upload_to="media/rating")
+
+    class Meta:
+        verbose_name = "Rating"
+        verbose_name_plural = "Ratings"
+
+    def __str__(self):
+        return f"{self.image}"
+
 
 class Movie(models.Model):
     name = models.CharField(max_length=100)
@@ -80,7 +97,9 @@ class Movie(models.Model):
     director = models.ManyToManyField(
         Director,
     )
-    rated = models.ForeignKey(Rated, on_delete=models.DO_NOTHING)
+    ratings = models.ManyToManyField(
+        Rating,
+    )
 
     class Meta:
         verbose_name = "Movie"
@@ -88,6 +107,7 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class District(models.Model):
     name = models.CharField(max_length=50)
@@ -98,6 +118,7 @@ class District(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class Theater(models.Model):
     name = models.CharField(max_length=80)
@@ -110,6 +131,7 @@ class Theater(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class Seat(models.Model):
     SEAT_TYPE = (
@@ -133,6 +155,7 @@ class Seat(models.Model):
     def __str__(self):
         return f"{self.seat_no} - {self.seat_type} - {self.theater}"
 
+
 class InTheater(models.Model):
     name = models.ForeignKey(Movie, default="", on_delete=models.DO_NOTHING)
     theater = models.ForeignKey(
@@ -146,6 +169,7 @@ class InTheater(models.Model):
 
     def __str__(self):
         return f"{self.theater} - {self.name} - {self.show_date} - {self.show_time}"
+
 
 class Booking(models.Model):
     number_of_seats = models.IntegerField()
@@ -172,6 +196,7 @@ class Booking(models.Model):
             f"{self.number_of_seats} - {self.time_stamp} - {self.booked} - {self.show}"
         )
 
+
 class ShowSeat(models.Model):
     price = models.IntegerField()
     seat = models.ForeignKey(
@@ -195,13 +220,15 @@ class ShowSeat(models.Model):
     def __str__(self):
         return f"{self.booking.user.username} - {self.price} - {self.seat} - {self.intheater.name}"
 
+
 class Payment(models.Model):
     amount = models.IntegerField()
     time_stamp = models.DateTimeField(auto_now_add=True)
     transaction_id = models.CharField(max_length=80)
     payment_method = models.CharField(max_length=80)
     booking = models.ForeignKey(
-        Booking, default="", on_delete=models.DO_NOTHING)
+        Booking, default="", on_delete=models.DO_NOTHING
+    )
 
     class Meta:
         verbose_name = "Payment"

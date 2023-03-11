@@ -1,17 +1,7 @@
-from .models import (
-    Booking,
-    District,
-    Movie,
-    Genre,
-    Actor,
-    Director,
-    InTheater,
-    Theater,
-    ShowSeat,
-    Seat,
-    CustomUser,
-)
 from rest_framework import serializers
+
+from .models import (Actor, Booking, CustomUser, Director, District, Genre,
+                     InTheater, Movie, Seat, ShowSeat, Theater, Rating)
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -46,11 +36,16 @@ class GenreSerializer(serializers.ModelSerializer):
         model = Genre
         fields = ("name",)
 
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ("image",)
 
 class MovieSerializer(serializers.ModelSerializer):
     genres = GenreSerializer(many=True)
     actors = ActorSerializer(many=True)
     director = DirectorSerializer(many=True)
+    ratings = RatingSerializer(many=True)
 
     class Meta:
         model = Movie
@@ -63,6 +58,7 @@ class MovieSerializer(serializers.ModelSerializer):
             "genres",
             "actors",
             "director",
+            "ratings",
         )
 
 
