@@ -71,9 +71,9 @@ class Screen:
 
 
 class Hall:
-    def __init__(self, id, hall_name, seats, seat_count, screen_count, screens):
+    def __init__(self, id, name, seats, seat_count, screen_count, screens):
         self.id = id
-        self.hall_name = hall_name
+        self.name = name
         self.seat_count = seat_count
         self.seats = seats
         self.screen_count = screen_count
