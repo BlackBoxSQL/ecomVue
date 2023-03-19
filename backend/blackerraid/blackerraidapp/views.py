@@ -1,12 +1,8 @@
 from rest_framework import viewsets
-
-from .models import Movie, InTheater, ShowSeat, Seat
+from .models import Movie
 from .serializers import (
+    CustomUserSerializer,
     MovieSerializer,
-    ComingSoonMovieSerializer,
-    InTheaterSerializer,
-    ShowSeatSerializer,
-    SeatSerializer,
 )
 from datetime import date, timedelta
 from django.http import HttpResponse
@@ -17,26 +13,11 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
 
 
-class ComingSoonViewSet(viewsets.ModelViewSet):
-    start_date = date.today()
-    end_date = start_date + timedelta(days=90)
-    queryset = Movie.objects.filter(release__range=[start_date, end_date])
-    serializer_class = ComingSoonMovieSerializer
-
-
-class InTheaterMovieViewSet(viewsets.ModelViewSet):
-    queryset = InTheater.objects.all()
-    serializer_class = InTheaterSerializer
-
-
-class ShowSeatSerializerViewSet(viewsets.ModelViewSet):
-    queryset = ShowSeat.objects.all()
-    serializer_class = ShowSeatSerializer
-
-
-class SeatSerializerViewSet(viewsets.ModelViewSet):
-    queryset = Seat.objects.all()
-    serializer_class = SeatSerializer
+# class ComingSoonViewSet(viewsets.ModelViewSet):
+#     start_date = date.today()
+#     end_date = start_date + timedelta(days=90)
+#     queryset = Movie.objects.filter(release_date__range=[start_date, end_date])
+#     serializer_class = MovieSerializer
 
 
 def home(request):
