@@ -101,8 +101,6 @@ c1 = Customer(name="John", money=20)
 c2 = Customer(name="Carol", money=120)
 c3 = Customer(name="Sue", money=240)
 
-customers = [c1, c2, c3]
-
 
 class Screen:
     def __init__(self, name):
@@ -129,19 +127,16 @@ seat2 = Seat(type="Regular")
 
 
 class Hall:
-    def __init__(self, name, seats, seat_count, screen_count, screens):
+    def __init__(self, name, seats, screens):
         self.name = name
-        self.seat_count = seat_count
         self.seats = seats
-        self.screen_count = screen_count
         self.screens = screens
 
     def __str__(self):
         return self.name, self.seat_count, self.seats, self.screen_count, self.screens
-
+    
 
 h1 = Hall(name="Pallabi",
-          seat_count=14,
           seats=[
               seat1.type,
               seat1.type,
@@ -158,12 +153,11 @@ h1 = Hall(name="Pallabi",
               seat2.type,
               seat2.type
           ],
-          screen_count=1,
+         
           screens=[sc1.name])
 
 
 h2 = Hall(name="Balaka",
-          seat_count=20,
           seats=[
               seat1.type,
               seat1.type,
@@ -186,33 +180,18 @@ h2 = Hall(name="Balaka",
               seat2.type,
               seat2.type
           ],
-          screen_count=2,
           screens=[sc1.name, sc1.name])
 
 
-class Show:
-    def __init__(self, movie, start_time, end_time, date, hall, screen):
-        self.movie = movie
-        self.start_time = start_time
-        self.end_time = end_time
-        self.date = date
-        self.hall = hall
-        self.screen = screen
 
+
+
+
+class SeatPlan:
+    def __init__(self, seatplan):
+        self.seatplan = seatplan
+    
     def __str__(self):
-        return self.movie_id, self.start_time, self.end_time, self.date, self.hall_id, self.screen_id
+        return self.seatplan
 
-
-sh1 = Show(
-    movie=m1.movie_name,
-    start_time=time(hour=9, minute=30),
-    end_time=time(hour=10, minute=30),
-    date=date(year=2020, month=1, day=1),
-    hall=h1.name,
-    screen=h1.screens
-)
-
-print(sh1.movie, sh1.start_time, sh1.end_time, sh1.date, sh1.hall, sh1.screen)
-
-
-
+s1 = SeatPlan(seatplan=)

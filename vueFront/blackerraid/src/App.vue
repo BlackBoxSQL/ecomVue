@@ -1,9 +1,10 @@
 <template>
-  <router-view></router-view>
   <h1>Movies</h1>
   <div v-for="movie in movies" v-bind:key="movie.id">
     <p class="text-xl text-primary">{{ movie.title }}</p>
     <img class="poster" :src="movie.poster" />
+    <img class="poster" :src="movie.rated.rate" />
+    <p class="text-xl text-primary">{{ movie.rated.name }}</p>
     <p>{{ dateFormat(movie.release_date) }}</p>
     <div class="flex">
       <div class="text-primary text-sm" v-for="genre in movie.genres" v-bind:key="genre.id">

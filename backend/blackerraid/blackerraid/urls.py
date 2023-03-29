@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register("movies", views.MovieViewSet)
+router.register("shows", views.ShowViewSet)
 
 urlpatterns = [
     path("api/v1/", include(router.urls)),
