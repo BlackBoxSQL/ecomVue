@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "noteproject"
+name = "blackerraid"
 version = "0.1.0"
 description = ""
 authors = ["blackboxsql <pythonboy007@gmailcom>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-Django = "3.2.15"
+python = "^3.11"
+Django = "^3.2.15"
 djangorestframework = "^3.13.1"
 Markdown = "^3.4.1"
 django-filter = "^22.1"
